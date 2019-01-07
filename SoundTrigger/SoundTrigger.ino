@@ -10,12 +10,26 @@ void setup() {
 void loop() {
   // read the input on analog pin 0:
   int sensorValue = analogRead(A0);
+  /* int sensorValue1 = analogRead(A1);
+     int sensorValue2 = analogRead(A2);
+     int sensorValue3 = analogRead(A3);
+   */
   // print out the value you read:
-  Serial.println(sensorValue);
-  if(sensorValue < 100 && sensorValue > 50) {
-     Serial.println("M"); // send the letter T (for Trigger) once the sensor value is bigger than 100  
-  }else  if(sensorValue > 100) {
-     Serial.println("T"); // send the letter T (for Trigger) once the sensor value is bigger than 100  
-  }
+    Serial.println(sensorValue);
+    /*Serial.println(sensorValue1);
+    Serial.println(sensorValue2);
+    Serial.println(sensorValue3);*/
+   if(sensorValue > 100) {
+     Serial.println("A"); // send the letter T (for Trigger) once the sensor value is bigger than 100  
+    }
+    /* if (sensorValue1 > 100){
+        Serial.println("B");
+       if(sensorValue2 > 100) {
+        Serial.println("C");   
+       }
+       if(sensorValue3 > 100) {
+        Serial.println("D");   
+       }
+     */
   delay(1);        // delay in between reads for stability
 }

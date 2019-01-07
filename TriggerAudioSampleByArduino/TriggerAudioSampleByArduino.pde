@@ -5,6 +5,9 @@ import ddf.minim.*;
 
 Minim minim;
 AudioPlayer player;
+AudioPlayer player1;
+AudioPlayer player2;
+AudioPlayer player3;
 
 int lf = 10;    // Linefeed in ASCII
 String myString = null;
@@ -28,6 +31,9 @@ void setup() {
   // sketch folder. you can also pass an absolute path, or a URL.
   // Change the name of the audio file here and add it by clicking on "Sketch —> Import File"
   player = minim.loadFile("meow.mp3"); 
+  player1 = minim.loadFile("pew.wav");
+  player2 = minim.loadFile("anim.wav");
+  player3 = minim.loadFile("");
 }
 
 void draw() {
@@ -49,10 +55,28 @@ void draw() {
           int brightness = (int)map(sensorValue, 0, 1023, 0, 255);
           background(brightness);
         } catch(Exception e){}
-        if(myString.equals("T")){
+        if(myString.equals("A")){
           if(player.isPlaying() == false){
             player.play();
             player.rewind();
+          }
+        }
+        if(myString.equals("B")){
+          if(player1.isPlaying() == false){
+            player1.play();
+            player1.rewind();
+          }
+        }
+        if(myString.equals("C")){
+          if(player2.isPlaying() == false){
+            player2.play();
+            player2.rewind();
+          }
+        }
+        if(myString.equals("D")){
+          if(player3.isPlaying() == false){
+            player3.play();
+            player3.rewind();
           }
         }
       }
