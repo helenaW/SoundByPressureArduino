@@ -4,10 +4,16 @@ import processing.serial.*;
 import ddf.minim.*;
 
 Minim minim;
-AudioPlayer player;
-AudioPlayer player1;
-AudioPlayer player2;
-AudioPlayer player3;
+AudioPlayer correct;
+AudioPlayer wrong;
+AudioPlayer word1;
+AudioPlayer word2;
+AudioPlayer word3;
+AudioPlayer word4;
+AudioPlayer word5;
+int counter;
+String check;
+ArrayList <AudioPlayer> ar;
 
 int lf = 10;    // Linefeed in ASCII
 String myString = null;
@@ -26,14 +32,28 @@ void setup() {
   myString = null;
   // we pass this to Minim so that it can load files from the data directory
   minim = new Minim(this);
+  ar = new ArrayList<AudioPlayer>();
   // loadFile will look in all the same places as loadImage does.
   // this means you can find files that are in the data folder and the 
   // sketch folder. you can also pass an absolute path, or a URL.
   // Change the name of the audio file here and add it by clicking on "Sketch —> Import File"
-  player = minim.loadFile("meow.mp3"); 
-  player1 = minim.loadFile("pew.wav");
-  player2 = minim.loadFile("anim.wav");
-  player3 = minim.loadFile("");
+  correct = minim.loadFile("correct.wav");
+  wrong = minim.loadFile("error.wav");
+  word1 = minim.loadFile("meow.mp3");
+  word2 = minim.loadFile("pew.wav");
+  word3 = minim.loadFile("anim.wav");
+  word4 = minim.loadFile("haha.wav");
+  word5 = minim.loadFile("woop.mp3");
+  ar.add(word1);
+  ar.add(word2);
+  ar.add(word3);
+  ar.add(word4);
+  ar.add(word5);
+  ar.add(word1);
+  ar.add(word2);
+  ar.add(word3);
+  counter = 0;
+  check = "";
 }
 
 void draw() {
@@ -54,32 +74,69 @@ void draw() {
           // convert it in order to use it for the background color brightness
           int brightness = (int)map(sensorValue, 0, 1023, 0, 255);
           background(brightness);
+          checkCounter();
+          delay(500);
         } catch(Exception e){}
         if(myString.equals("A")){
-          if(player.isPlaying() == false){
-            player.play();
-            player.rewind();
+          if(ar.get(0).isPlaying() == false){
+            ar.get(0).play();
+            ar.get(0).rewind();
+            check = check +"1";
+            delay(500);
+            ++counter;
           }
         }
         if(myString.equals("B")){
-          if(player1.isPlaying() == false){
-            player1.play();
-            player1.rewind();
+          if(ar.get(1).isPlaying() == false){
+            ar.get(1).play();
+            ar.get(1).rewind();
+            counter++;
+            check = check +"2";
+            delay(500);
           }
         }
         if(myString.equals("C")){
-          if(player2.isPlaying() == false){
-            player2.play();
-            player2.rewind();
+          if(ar.get(2).isPlaying() == false){
+            ar.get(2).play();
+            ar.get(2).rewind();
+            counter+=1;
+            check = check +"3";
+            delay(500);;
           }
         }
         if(myString.equals("D")){
-          if(player3.isPlaying() == false){
-            player3.play();
-            player3.rewind();
+          if(ar.get(3).isPlaying() == false){
+            ar.get(3).play();
+            ar.get(3).rewind();
+            counter+=1;
+            check = check +"4";
+            delay(500);
           }
         }
       }
     }
   }
+}
+
+void checkCounter(){
+ println(counter);
+ if(counter>=4){
+   if(check.equals("1234")){
+     delay(500);
+     correct.play();
+     correct.rewind();
+     ar.remove(0);
+     ar.remove(0);
+     ar.remove(0);
+     ar.remove(0);
+   }else{
+     delay(500);
+     wrong.play();
+     wrong.rewind();
+   }
+   counter = 0;
+   check = "";
+ }else{
+  
+ }
 }
