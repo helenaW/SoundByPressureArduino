@@ -57,6 +57,8 @@ void setup() {
 }
 
 void draw() {
+  checkCounter();
+  delay(500);
   // check if there is something new on the serial port
   while (myPort.available() > 0) {
     // store the data in myString 
@@ -74,8 +76,7 @@ void draw() {
           // convert it in order to use it for the background color brightness
           int brightness = (int)map(sensorValue, 0, 1023, 0, 255);
           background(brightness);
-          checkCounter();
-          delay(500);
+          
         } catch(Exception e){}
         if(myString.equals("A")){
           if(ar.get(0).isPlaying() == false){
@@ -119,7 +120,7 @@ void draw() {
 }
 
 void checkCounter(){
- println(counter);
+ //println(counter);
  if(counter>=4){
    if(check.equals("1234")){
      delay(500);
