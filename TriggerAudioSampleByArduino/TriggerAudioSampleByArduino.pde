@@ -11,14 +11,25 @@ AudioPlayer word2;
 AudioPlayer word3;
 AudioPlayer word4;
 AudioPlayer word5;
+AudioPlayer word6;
+AudioPlayer word7;
+AudioPlayer word8;
+AudioPlayer word9;
+AudioPlayer word10;
+AudioPlayer word11;
+AudioPlayer word12;
 int counter;
 String check;
 ArrayList <AudioPlayer> ar;
-
+int sentenceNum;
 int lf = 10;    // Linefeed in ASCII
 String myString = null;
 Serial myPort;  // The serial port
 int sensorValue = 0;
+int playedA;
+int playedB;
+int playedC;
+int playedD;
 
 void setup() {
   // List all the available serial ports
@@ -39,21 +50,41 @@ void setup() {
   // Change the name of the audio file here and add it by clicking on "Sketch —> Import File"
   correct = minim.loadFile("correct.wav");
   wrong = minim.loadFile("error.wav");
-  word1 = minim.loadFile("meow.mp3");
-  word2 = minim.loadFile("pew.wav");
-  word3 = minim.loadFile("anim.wav");
-  word4 = minim.loadFile("haha.wav");
-  word5 = minim.loadFile("woop.mp3");
+  word1 = minim.loadFile("what.mp3");
+  word2 = minim.loadFile("is.mp3");
+  word3 = minim.loadFile("your.mp3");
+  word4 = minim.loadFile("name.mp3");
+  word5 = minim.loadFile("how.mp3");
+  word6 = minim.loadFile("old.mp3");
+  word7 = minim.loadFile("are.mp3");
+  word8 = minim.loadFile("you.mp3");
+  word9 = minim.loadFile("do.mp3");
+  word10 = minim.loadFile("speak.mp3");
+  word11 = minim.loadFile("english.mp3");
+  word12 = minim.loadFile("doing.mp3");
   ar.add(word1);
   ar.add(word2);
   ar.add(word3);
   ar.add(word4);
   ar.add(word5);
-  ar.add(word1);
-  ar.add(word2);
-  ar.add(word3);
+  ar.add(word6);
+  ar.add(word7);
+  ar.add(word8);
+  ar.add(word9);
+  ar.add(word8);
+  ar.add(word10);
+  ar.add(word11);
+  ar.add(word5);
+  ar.add(word7);
+  ar.add(word8);
+  ar.add(word12);
   counter = 0;
   check = "";
+  sentenceNum = 1;
+  playedA = 0;
+  playedB  = 0;
+  playedC = 0;
+  playedD = 0;
 }
 
 void draw() {
@@ -79,36 +110,37 @@ void draw() {
           
         } catch(Exception e){}
         if(myString.equals("A")){
-          if(ar.get(0).isPlaying() == false){
+          //if(ar.get(0).isPlaying() == false){
+            if(playedA == 0){
             ar.get(0).play();
-            ar.get(0).rewind();
+            playedA = 1;
             check = check +"1";
             delay(500);
             ++counter;
           }
         }
         if(myString.equals("B")){
-          if(ar.get(1).isPlaying() == false){
+          if(playedB == 0){
             ar.get(1).play();
-            ar.get(1).rewind();
+            playedB = 1;
             counter++;
             check = check +"2";
             delay(500);
           }
         }
         if(myString.equals("C")){
-          if(ar.get(2).isPlaying() == false){
+          if(playedC == 0){
             ar.get(2).play();
-            ar.get(2).rewind();
+            playedC = 1;
             counter+=1;
             check = check +"3";
             delay(500);;
           }
         }
         if(myString.equals("D")){
-          if(ar.get(3).isPlaying() == false){
+          if(playedD == 0){
             ar.get(3).play();
-            ar.get(3).rewind();
+            playedD = 1;
             counter+=1;
             check = check +"4";
             delay(500);
@@ -122,10 +154,18 @@ void draw() {
 void checkCounter(){
  //println(counter);
  if(counter>=4){
+   playedA = 0;
+   playedB = 0;
+   playedC = 0;
+   playedD = 0;
    if(check.equals("1234")){
      delay(500);
      correct.play();
      correct.rewind();
+     ar.get(0).rewind();
+     ar.get(1).rewind();
+     ar.get(2).rewind();
+     ar.get(3).rewind();
      ar.remove(0);
      ar.remove(0);
      ar.remove(0);
@@ -134,6 +174,10 @@ void checkCounter(){
      delay(500);
      wrong.play();
      wrong.rewind();
+     ar.get(0).rewind();
+     ar.get(1).rewind();
+     ar.get(2).rewind();
+     ar.get(3).rewind();
    }
    counter = 0;
    check = "";

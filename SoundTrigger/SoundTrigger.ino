@@ -19,18 +19,18 @@ void loop() {
     Serial.println(sensorValue1);
     Serial.println(sensorValue2);
     Serial.println(sensorValue3);
-   if(sensorValue > 100) {
+   if(sensorValue >= 100) {
      Serial.println("A"); // send the letter T (for Trigger) once the sensor value is bigger than 100  
     }
-     if (sensorValue1 > 100){
+     if (sensorValue1 >= 100){
         Serial.println("B");
      }
-     if(sensorValue2 > 100) {
+     if(sensorValue2 >= 100) {
         Serial.println("C");   
      }
-      if(sensorValue3 > 100) {
+      if(sensorValue3 >= 100) {
         Serial.println("D");   
        }
      
-  delay(1);        // delay in between reads for stability
+  delay(0.5);        // delay in between reads for stability
 }
