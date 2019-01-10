@@ -21,6 +21,7 @@ AudioPlayer word12;
 int counter;
 String check;
 ArrayList <AudioPlayer> ar;
+IntList shuff;
 int sentenceNum;
 int lf = 10;    // Linefeed in ASCII
 String myString = null;
@@ -30,6 +31,7 @@ int playedA;
 int playedB;
 int playedC;
 int playedD;
+boolean mixed;
 
 void setup() {
   // List all the available serial ports
@@ -85,11 +87,21 @@ void setup() {
   playedB  = 0;
   playedC = 0;
   playedD = 0;
+  shuff = new IntList();
+  shuff.append(0);
+  shuff.append(1);
+  shuff.append(2);
+  shuff.append(3);
+  mixed = false;
 }
 
 void draw() {
   checkCounter();
   delay(500);
+  if(!mixed){
+    shuff.shuffle();
+    mixed = true;
+  }
   // check if there is something new on the serial port
   while (myPort.available() > 0) {
     // store the data in myString 
@@ -112,37 +124,37 @@ void draw() {
         if(myString.equals("A")){
           //if(ar.get(0).isPlaying() == false){
             if(playedA == 0){
-            ar.get(0).play();
+            ar.get(shuff.get(0)).play();
             playedA = 1;
-            check = check +"1";
+            check = check +(shuff.get(0) +1);
             delay(500);
             ++counter;
           }
         }
         if(myString.equals("B")){
           if(playedB == 0){
-            ar.get(1).play();
+            ar.get(shuff.get(1)).play();
             playedB = 1;
             counter++;
-            check = check +"2";
+            check = check +(shuff.get(1) +1);
             delay(500);
           }
         }
         if(myString.equals("C")){
           if(playedC == 0){
-            ar.get(2).play();
+            ar.get(shuff.get(2)).play();
             playedC = 1;
             counter+=1;
-            check = check +"3";
+            check = check +(shuff.get(2) +1);
             delay(500);;
           }
         }
         if(myString.equals("D")){
           if(playedD == 0){
-            ar.get(3).play();
+            ar.get(shuff.get(3)).play();
             playedD = 1;
             counter+=1;
-            check = check +"4";
+            check = check +(shuff.get(3) +1);
             delay(500);
           }
         }
@@ -170,6 +182,7 @@ void checkCounter(){
      ar.remove(0);
      ar.remove(0);
      ar.remove(0);
+     mixed = false;
    }else{
      delay(500);
      wrong.play();
