@@ -48,8 +48,8 @@ void setup() {
   // this means you can find files that are in the data folder and the 
   // sketch folder. you can also pass an absolute path, or a URL.
   // Change the name of the audio file here and add it by clicking on "Sketch —> Import File"
-  correct = minim.loadFile("correct.wav");
-  wrong = minim.loadFile("error.wav");
+  correct = minim.loadFile("welldone.mp3");
+  wrong = minim.loadFile("tryagain.mp3");
   word1 = minim.loadFile("what.mp3");
   word2 = minim.loadFile("is.mp3");
   word3 = minim.loadFile("your.mp3");
